@@ -2,6 +2,7 @@
 Build/Packages/
 Build/_PackageInt/
 Build/**/*.spb
+Build/_Temp/
 
 # Built panel SPB (copied in by build.bat)
 InGamePanels/*.spb
