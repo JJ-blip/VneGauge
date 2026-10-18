@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<SimBase.Document Type="InGamePanels" version="1,0">
+  <Filename>InGamePanel_VneGauge.spb</Filename>
+  <InGamePanels.InGamePanelDefinition id="PANEL_VNE_GAUGE_NATIVE" Name="VNE Gauge" url="html_UI/InGamePanels/VneGaugePanel/CustomPanel.html" resizeDirections="Both" minWidth="6" minHeight="12" defaultWidth="9" defaultHeight="20" defaultTop="2" defaultRight="2" icon="ICON_TOOLBAR_VNE_GAUGE" buttonVisible="true">
+  </InGamePanels.InGamePanelDefinition>
+</SimBase.Document>

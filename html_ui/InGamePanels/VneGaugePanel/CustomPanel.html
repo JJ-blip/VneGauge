@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="/SCSS/common.css" />
+<link rel="stylesheet" href="CustomPanel.css" />
+<script type="text/javascript" src="/JS/coherent.js"></script>
+<script type="text/javascript" src="/JS/common.js"></script>
+<script type="text/javascript" src="/JS/dataStorage.js"></script>
+<script type="text/javascript" src="/JS/buttons.js"></script>
+<script type="text/javascript" src="/JS/Services/ToolBarPanels.js"></script>
+<script type="text/javascript" src="/Pages/VCockpit/Instruments/Shared/BaseInstrument.js"></script>
+<link rel="import" href="/templates/NewPushButton/NewPushButton.html" />
+<link rel="import" href="/templates/ToggleButton/toggleButton.html" />
+<link rel="import" href="/templates/tabMenu/tabMenu.html" />
+<link rel="import" href="/templates/ingameUi/ingameUi.html" />
+<link rel="import" href="/templates/ingameUiHeader/ingameUiHeader.html" />
+<link rel="import" href="/templates/NewListButton/NewListButton.html" />
+<script type="text/javascript" src="CustomPanel.js"></script>
+</head>
+<body class="border-box">
+<!--
+  PANEL IDENTITY
+
+  Keep the element ID, panel-id, HTML path and toolbar resources VNE-specific.
+  MSFS merges package UI resources into a virtual filesystem, so unique names
+  prevent this panel from colliding with other installed InGamePanels.
+
+  <ingame-ui> and <ingame-ui-header> are MSFS components. We use the native
+  header for window management and only control its visibility.
+-->
+<vne-gauge-panel>
+  <ingame-ui id="VneGaugePanel" panel-id="PANEL_VNE_GAUGE_NATIVE" title="VNE" class="ingameUiFrame panelInvisible" content-fit="true" min-width="160" min-height="120">
+    <div id="VneGaugePanelWrap">
+<svg id="gauge" viewBox="0 0 178 400" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="trackClip"><rect x="92" y="18" width="18" height="350" rx="3"/></clipPath>
+  </defs>
+
+  <!-- STRATEGY: keep the 18-unit speed bar centred on the x=101 gauge axis. -->
+  <!-- Dynamic coloured speed zones -->
+  <g clip-path="url(#trackClip)">
+    <rect id="dangerZone" class="danger" x="92" width="18"/>
+    <rect id="targetZone" class="target" x="92" width="18"/>
+    <rect id="safeZone" class="safe" x="92" width="18"/>
+  </g>
+  <rect class="track-outline" x="92" y="18" width="18" height="350" rx="3"/>
+
+  <!-- Limit labels/ticks -->
+  <text class="label" x="5" id="vneTitle">VNE</text>
+  <text class="value" x="5" id="vneValue">154</text>
+  <line class="tick" x1="70" x2="90" id="vneTick"/>
+
+  <text class="value" x="5" id="targetValue">145</text>
+  <line class="tick" x1="70" x2="90" id="targetTick"/>
+
+  <text class="value" x="5" id="safeValue">&lt; 130</text>
+  <line class="tick" x1="70" x2="90" id="safeTick"/>
+
+  <!-- Current and predicted speed -->
+  <polygon id="currentMarker" class="current" points="82,-6 92,0 82,6"/>
+  <line id="predictedMarker" class="predicted" x1="91" x2="111"/>
+  <line id="predictedMarkerInner" class="predicted-inner" x1="93" x2="109"/>
+
+  <!-- Readouts: compact right side -->
+  <text id="tasValue" class="value" x="114" y="174">142</text>
+  <text class="label" x="114" y="190">TAS</text>
+  <text id="efficiency" class="value eff-warn" x="114" y="221">92%</text>
+
+  <!-- Flap readout has dedicated width on left -->
+  <text class="label" x="5" y="245">FLAPS</text>
+  <text id="flapText" class="value" x="5" y="268">4°N</text>
+
+</svg>
+    </div>
+  </ingame-ui>
+</vne-gauge-panel>
+<script src="js/SpeedPredictor.js"></script>
+<script src="/JS/coherent.js"></script>
+<script src="/JS/common.js"></script>
+<script src="/JS/simvar.js"></script>
+<script src="js/MsfsTelemetryDataSource.js"></script>
+<script src="js/AircraftProfiles.js"></script>
+<script src="js/AircraftMetadata.js"></script>
+<script src="js/GaugeController.js"></script>
+
+</body>
+</html>

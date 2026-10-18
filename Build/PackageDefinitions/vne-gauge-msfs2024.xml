@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AssetPackage Version="2.0.0">
+	<ItemSettings>
+		<ContentType>UNKNOWN</ContentType>
+		<Title>VNE Gauge</Title>
+		<Manufacturer>VNE Gauge</Manufacturer>
+		<Creator>VNE Gauge</Creator>
+	</ItemSettings>
+	<Flags>
+		<VisibleInStore>false</VisibleInStore>
+		<CanBeReferenced>false</CanBeReferenced>
+	</Flags>
+	<PackageOrderHint>GENERIC_AIRPORT_PATCH</PackageOrderHint>
+	<AssetGroups>
+		<AssetGroup Name="vne-gauge-msfs2024">
+			<Type Version="0">SPB</Type>
+			<Flags>
+				<FSXCompatibility>false</FSXCompatibility>
+			</Flags>
+			<AssetDir>PackageSources\</AssetDir>
+			<OutputDir>Build\</OutputDir>
+		</AssetGroup>
+	</AssetGroups>
+</AssetPackage>
+

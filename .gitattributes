@@ -1,0 +1,8 @@
+* text=auto
+*.bat  text eol=crlf
+*.svg  text
+*.spb  binary
+
+# Keep dot files out of git archive exports
+.gitignore      export-ignore
+.gitattributes  export-ignore

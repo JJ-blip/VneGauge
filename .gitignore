@@ -15,3 +15,6 @@ Desktop.ini
 .DS_Store
 .vs/
 .vscode/
+
+# Packaged output from "build.bat package"
+dist/

@@ -1,0 +1,12 @@
+<svg id="VneGaugeToolbar" version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <title>ICON_TOOLBAR_VNE_GAUGE</title>
+  <!--
+    TOOLBAR ICON
+    Follow the proven MSFS InGamePanel convention used by other standalone
+    panels: the SVG filename is the icon resource name referenced by the SPB.
+    Keep this monochrome and geometrically simple for the small toolbar size.
+  -->
+  <path d="M27 8h10v48H27z"/>
+  <path d="M15 13h9v4h-9zM11 29h13v4H11zM15 45h9v4h-9z"/>
+  <path d="M42 12h5l4 11 4-11h5l-7 18h-4z"/>
+</svg>

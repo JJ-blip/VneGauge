@@ -1,0 +1,115 @@
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+body { font-family: Arial, sans-serif; }
+
+/*
+ * PANEL SHELL / OWNERSHIP
+ *
+ * This is the native MSFS <ingame-ui> shell.  MSFS owns the window header and
+ * its move/detach/close behaviour; VNE only controls when that furniture is
+ * visible. Keep the VNE-specific IDs and paths here because MSFS merges package
+ * UI resources into a virtual filesystem; unique identities prevent collisions
+ * with other installed InGamePanels.
+ */
+ingame-ui#VneGaugePanel {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100% !important;
+  width:100% !important;
+}
+ingame-ui#VneGaugePanel #VneGaugePanelWrap {
+  display:flex;
+  flex-direction:column;
+  width:100% !important;
+  height:100% !important;
+  min-height:0;
+  min-width:0;
+  overflow:hidden;
+  align-items:stretch !important;
+  flex:1 1 auto !important;
+}
+ingame-ui#VneGaugePanel .ingameUiContent,
+ingame-ui#VneGaugePanel .ingameUiWrapper {
+  display:flex !important;
+  flex-direction:column !important;
+  width:100% !important;
+  height:100% !important;
+  min-height:0 !important;
+  min-width:0 !important;
+  overflow:hidden !important;
+  align-items:stretch !important;
+  flex:1 1 auto !important;
+}
+#VneGaugePanel { background:transparent; }
+#VneGaugePanelWrap { position:relative; }
+svg { width:100%; height:100%; display:block; overflow:visible; flex:1 1 auto; }
+
+/*
+ * WINDOW MANAGEMENT
+ *
+ * The flight gauge has no clickable controls.  Its normal presentation is
+ * therefore furniture-free: the native MSFS header and resize guide are hidden.
+ * Clicking the gauge means "I want to manage this window"; CustomPanel.js adds
+ * body.show-ui, revealing both.  We hide by opacity rather than removing or
+ * repositioning the MSFS header so its native window behaviour remains intact.
+ */
+/*
+ * MSFS also has native hover styling for <ingame-ui-header>.  That styling can
+ * reveal the header as soon as the pointer enters the panel, bypassing our
+ * click-to-manage policy.  These !important declarations are intentional: VNE
+ * owns only the visibility state, while MSFS continues to own the header itself
+ * and all of its move/detach/close behaviour.
+ *
+ * visibility:hidden is used in addition to opacity so a hidden native header
+ * cannot become an invisible hit target.  Visibility preserves its layout slot,
+ * avoiding the geometry changes caused by display:none or moving it off-screen.
+ */
+ingame-ui#VneGaugePanel ingame-ui-header {
+  position:static;
+  opacity:0 !important;
+  visibility:hidden !important;
+  pointer-events:none !important;
+  transition:opacity .20s ease, visibility 0s linear .20s;
+}
+body.show-ui ingame-ui#VneGaugePanel ingame-ui-header {
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transition:opacity .20s ease, visibility 0s;
+}
+
+/* The border is a resize-location guide, so it follows the header visibility. */
+#VneGaugePanelWrap {
+  box-sizing:border-box;
+  border:1px solid transparent;
+  padding:4px;
+  background:rgba(0,0,0,.035);
+  transition:border-color .20s ease;
+}
+body.show-ui #VneGaugePanelWrap {
+  border-color:rgba(255,255,255,.70);
+}
+
+/* STRATEGY: larger HUD text improves glance readability without changing panel geometry. */
+.label, .value, .minor { fill:#fff; paint-order:stroke; stroke:rgba(0,0,0,.72); stroke-width:2px; stroke-linejoin:round; }
+.label { font-size:17px; font-weight:600; }
+.value { font-size:26px; font-weight:700; }
+.minor { font-size:16px; font-weight:600; }
+.tick { stroke:#fff; stroke-width:2; filter:drop-shadow(0 0 1px #000); }
+.safe { fill:#35c84a; }
+.target { fill:#f0a51a; }
+.danger { fill:#e12f32; }
+.track-outline { fill:none; stroke:rgba(255,255,255,.92); stroke-width:1.5; }
+.predicted { stroke:#b40000; stroke-width:5; stroke-linecap:round; }
+.predicted-inner { stroke:#ff5b5b; stroke-width:2.5; stroke-linecap:round; }
+.current { fill:rgba(20,20,20,.85); stroke:#fff; stroke-width:2; }
+.eff-good { fill:#7dff8b; }
+.eff-warn { fill:#ffb331; }
+.eff-bad { fill:#ff5c5c; }
