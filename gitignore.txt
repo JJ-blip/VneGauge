@@ -1,0 +1,17 @@
+# fspackagetool build output
+Build/Packages/
+Build/_PackageInt/
+Build/**/*.spb
+
+# Built panel SPB (copied in by build.bat)
+InGamePanels/*.spb
+
+# Per-user package tool settings
+*.user
+
+# OS / editor noise
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vs/
+.vscode/
