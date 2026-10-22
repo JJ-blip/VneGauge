@@ -1,10 +1,10 @@
 'use strict';
 (()=>{
-const state={safeSpeed:130,targetSpeed:145,vne:154,currentSpeed:130,predictedSpeed:130,flapText:'—',profile:null};
+const state={safeSpeed:130,targetSpeed:145,vne:154,currentSpeed:130,predictedSpeed:130,flapText:'—',gearDown:false,profile:null};
 const predictor=new SpeedPredictor(4.0,.8,8), el=id=>document.getElementById(id), TOP=18,BOTTOM=368,H=BOTTOM-TOP;
 const y=v=>BOTTOM-((Math.max(state.safeSpeed,Math.min(state.vne+3,v))-state.safeSpeed)/Math.max(.001,state.vne+3-state.safeSpeed))*H;
 function zone(id,a,b){const n=el(id),p=y(a),q=y(b);n.setAttribute('y',Math.min(p,q));n.setAttribute('height',Math.abs(q-p));}
-function render(){const v=y(state.vne),t=y(state.targetSpeed),s=y(state.safeSpeed);zone('safeZone',state.safeSpeed,state.targetSpeed);zone('targetZone',state.targetSpeed,state.vne);zone('dangerZone',state.vne,state.vne+3);[['vneTick',v],['targetTick',t],['safeTick',s]].forEach(([i,p])=>{el(i).setAttribute('y1',p);el(i).setAttribute('y2',p)});el('vneTitle').setAttribute('y',v-17);el('vneValue').setAttribute('y',v+1);el('targetValue').setAttribute('y',t+6);el('safeValue').setAttribute('y',s-3);el('vneValue').textContent=Math.round(state.vne);el('targetValue').textContent=Math.round(state.targetSpeed);el('safeValue').textContent=Math.round(state.safeSpeed);el('currentMarker').setAttribute('transform',`translate(0 ${y(state.currentSpeed)})`);const py=y(state.predictedSpeed);['predictedMarker','predictedMarkerInner'].forEach(i=>{el(i).setAttribute('y1',py);el(i).setAttribute('y2',py)});el('tasValue').textContent=Math.round(state.currentSpeed);el('flapText').textContent=state.flapText;}
+function render(){const v=y(state.vne),t=y(state.targetSpeed),s=y(state.safeSpeed);zone('safeZone',state.safeSpeed,state.targetSpeed);zone('targetZone',state.targetSpeed,state.vne);zone('dangerZone',state.vne,state.vne+3);[['vneTick',v],['targetTick',t],['safeTick',s]].forEach(([i,p])=>{el(i).setAttribute('y1',p);el(i).setAttribute('y2',p)});el('vneTitle').setAttribute('y',v-17);el('vneValue').setAttribute('y',v+1);el('targetValue').setAttribute('y',t+6);el('safeValue').setAttribute('y',s-3);el('vneValue').textContent=Math.round(state.vne);el('targetValue').textContent=Math.round(state.targetSpeed);el('safeValue').textContent=Math.round(state.safeSpeed);el('currentMarker').setAttribute('transform',`translate(0 ${y(state.currentSpeed)})`);const py=y(state.predictedSpeed);['predictedMarker','predictedMarkerInner'].forEach(i=>{el(i).setAttribute('y1',py);el(i).setAttribute('y2',py)});el('tasValue').textContent=Math.round(state.currentSpeed);el('flapText').textContent=state.flapText;el('gearWarn').setAttribute('visibility',state.gearDown?'visible':'hidden');}
 function actualFlapText(d){
   if(!d.flapAvailable) return '—';
   const idx=Number.isFinite(d.flapEffectiveIndex)?Math.round(d.flapEffectiveIndex):Math.round(d.flapIndex);
@@ -79,8 +79,8 @@ function updateEfficiency(d){
 }
 
 const ds=new MsfsTelemetryDataSource(200);
-ds.onTelemetry=d=>{predictor.addSample(d.time,d.tas);let pred=predictor.predict(2.0);if(pred===null||pred<0||Math.abs(pred-d.tas)>20)pred=d.tas;state.currentSpeed=d.tas;state.predictedSpeed=pred;state.flapText=flapText(d);updateEfficiency(d);render();};
-ds.onStatus=s=>{if(s!=='CONNECTED'){state.flapText=s==='CONNECTING'?'…':'OFF';render();}};
+ds.onTelemetry=d=>{predictor.addSample(d.time,d.tas);let pred=predictor.predict(2.0);if(pred===null||pred<0||Math.abs(pred-d.tas)>20)pred=d.tas;state.currentSpeed=d.tas;state.predictedSpeed=pred;state.flapText=flapText(d);state.gearDown=d.gearRetractable&&d.gearHandleDown;updateEfficiency(d);render();};
+ds.onStatus=s=>{if(s!=='CONNECTED'){state.flapText=s==='CONNECTING'?'…':'OFF';state.gearDown=false;render();}};
 const metadata=new AircraftMetadata(5000);
 metadata.onUpdate=title=>{
   const p=AircraftProfiles.find(title);

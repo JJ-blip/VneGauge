@@ -7,13 +7,13 @@
                     },
                     {
                         "path":  "html_ui/InGamePanels/VneGaugePanel/CustomPanel.css",
-                        "size":  4110,
-                        "date":  134346546160000000
+                        "size":  4139,
+                        "date":  134371452179076139
                     },
                     {
                         "path":  "html_ui/InGamePanels/VneGaugePanel/CustomPanel.html",
-                        "size":  3837,
-                        "date":  134346546160000000
+                        "size":  3999,
+                        "date":  134371452178975702
                     },
                     {
                         "path":  "html_ui/InGamePanels/VneGaugePanel/CustomPanel.js",
@@ -32,13 +32,13 @@
                     },
                     {
                         "path":  "html_ui/InGamePanels/VneGaugePanel/js/GaugeController.js",
-                        "size":  5654,
-                        "date":  134343818940000000
+                        "size":  5817,
+                        "date":  134371452178875524
                     },
                     {
                         "path":  "html_ui/InGamePanels/VneGaugePanel/js/MsfsTelemetryDataSource.js",
-                        "size":  2091,
-                        "date":  134343818940000000
+                        "size":  2308,
+                        "date":  134371452178403134
                     },
                     {
                         "path":  "html_ui/InGamePanels/VneGaugePanel/js/SpeedPredictor.js",

@@ -30,6 +30,9 @@ class MsfsTelemetryDataSource {
       flapPercent: this.readNumber('FLAPS HANDLE PERCENT','percent over 100'),
       flapPositions: this.readNumber('FLAPS NUM HANDLE POSITIONS','number'),
       flapSpeedLimit: this.readNumber('FLAPS CURRENT SPEED LIMITATION','knots'),
+      // Gear warning: handle down (1) on a retractable-gear aircraft.
+      gearRetractable: !!this.readNumber('IS GEAR RETRACTABLE','bool'),
+      gearHandleDown: this.readNumber('GEAR HANDLE POSITION','bool')===1,
       // Match the C# PerformanceService inputs. These are read in knots,
       // then smoothed over a 10-second window before conversion to m/s.
       netto: this.readNumber('VARIOMETER NETTO','knots'),
