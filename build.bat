@@ -34,12 +34,12 @@ if errorlevel 1 exit /b %errorlevel%
 
 echo Regenerating layout.json...
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-  "$root=(Get-Location).Path; $files=Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notlike ($root+'\Build\*') -and $_.FullName -notlike ($root+'\.git\*') -and $_.FullName -notlike ($root+'\dist\*') -and -not $_.Name.StartsWith('.') -and $_.Name -ne 'layout.json' -and $_.Name -ne 'manifest.json' -and $_.Name -ne 'build.bat' -and $_.Name -ne 'README.txt' }; $content=@(); foreach($f in $files){ $rel=$f.FullName.Substring($root.Length+1).Replace('\','/'); $content += [ordered]@{path=$rel; size=$f.Length; date=$f.LastWriteTimeUtc.ToFileTimeUtc()} }; [ordered]@{content=$content} | ConvertTo-Json -Depth 4 | Set-Content -Encoding ASCII layout.json"
+  "$root=(Get-Location).Path; $files=Get-ChildItem -Path html_ui,InGamePanels -Recurse -File; $content=@(); foreach($f in $files){ $rel=$f.FullName.Substring($root.Length+1).Replace('\','/'); $content += [ordered]@{path=$rel; size=$f.Length; date=$f.LastWriteTimeUtc.ToFileTimeUtc()} }; [ordered]@{content=$content} | ConvertTo-Json -Depth 4 | Set-Content -Encoding ASCII layout.json"
 if errorlevel 1 exit /b %errorlevel%
 
 echo Updating total_package_size...
 powershell -NoProfile -ExecutionPolicy Bypass -Command ^
-  "$root=(Get-Location).Path; $total=(Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notlike ($root+'\Build\*') -and $_.FullName -notlike ($root+'\.git\*') -and $_.FullName -notlike ($root+'\dist\*') -and -not $_.Name.StartsWith('.') -and $_.Name -ne 'manifest.json' -and $_.Name -ne 'build.bat' -and $_.Name -ne 'README.txt' } | Measure-Object Length -Sum).Sum; $m=Get-Content -Raw manifest.json | ConvertFrom-Json; $m | Add-Member -NotePropertyName total_package_size -NotePropertyValue ('{0:D20}' -f [int64]$total) -Force; $m | ConvertTo-Json -Depth 10 | Set-Content -Encoding ASCII manifest.json"
+  "$root=(Get-Location).Path; $total=(Get-ChildItem -Path html_ui,InGamePanels,layout.json -Recurse -File | Measure-Object Length -Sum).Sum; $m=Get-Content -Raw manifest.json | ConvertFrom-Json; $m | Add-Member -NotePropertyName total_package_size -NotePropertyValue ('{0:D20}' -f [int64]$total) -Force; $m | ConvertTo-Json -Depth 10 | Set-Content -Encoding ASCII manifest.json"
 if errorlevel 1 exit /b %errorlevel%
 
 if /i "%~1"=="package" goto :package

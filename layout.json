@@ -1,49 +1,54 @@
 {
-  "content": [
-    {
-      "path": "html_ui/InGamePanels/VneGaugePanel/CustomPanel.css",
-      "size": 4110,
-      "date": 134346546169916084
-    },
-    {
-      "path": "html_ui/InGamePanels/VneGaugePanel/CustomPanel.html",
-      "size": 3837,
-      "date": 134346546169915534
-    },
-    {
-      "path": "html_ui/InGamePanels/VneGaugePanel/CustomPanel.js",
-      "size": 2620,
-      "date": 134346546169916556
-    },
-    {
-      "path": "html_ui/InGamePanels/VneGaugePanel/js/AircraftMetadata.js",
-      "size": 781,
-      "date": 134343782300000000
-    },
-    {
-      "path": "html_ui/InGamePanels/VneGaugePanel/js/AircraftProfiles.js",
-      "size": 1466,
-      "date": 134343807500000000
-    },
-    {
-      "path": "html_ui/InGamePanels/VneGaugePanel/js/GaugeController.js",
-      "size": 5654,
-      "date": 134343818940000000
-    },
-    {
-      "path": "html_ui/InGamePanels/VneGaugePanel/js/MsfsTelemetryDataSource.js",
-      "size": 2091,
-      "date": 134343818940000000
-    },
-    {
-      "path": "html_ui/InGamePanels/VneGaugePanel/js/SpeedPredictor.js",
-      "size": 1349,
-      "date": 134342191580000000
-    },
-    {
-      "path": "html_ui/icons/toolbar/ICON_TOOLBAR_VNE_GAUGE.svg",
-      "size": 537,
-      "date": 134346530010000000
-    }
-  ]
+    "content":  [
+                    {
+                        "path":  "html_ui/icons/toolbar/ICON_TOOLBAR_VNE_GAUGE.svg",
+                        "size":  537,
+                        "date":  134346530010000000
+                    },
+                    {
+                        "path":  "html_ui/InGamePanels/VneGaugePanel/CustomPanel.css",
+                        "size":  4110,
+                        "date":  134346546160000000
+                    },
+                    {
+                        "path":  "html_ui/InGamePanels/VneGaugePanel/CustomPanel.html",
+                        "size":  3837,
+                        "date":  134346546160000000
+                    },
+                    {
+                        "path":  "html_ui/InGamePanels/VneGaugePanel/CustomPanel.js",
+                        "size":  2620,
+                        "date":  134346546160000000
+                    },
+                    {
+                        "path":  "html_ui/InGamePanels/VneGaugePanel/js/AircraftMetadata.js",
+                        "size":  781,
+                        "date":  134343782300000000
+                    },
+                    {
+                        "path":  "html_ui/InGamePanels/VneGaugePanel/js/AircraftProfiles.js",
+                        "size":  1466,
+                        "date":  134343807500000000
+                    },
+                    {
+                        "path":  "html_ui/InGamePanels/VneGaugePanel/js/GaugeController.js",
+                        "size":  5654,
+                        "date":  134343818940000000
+                    },
+                    {
+                        "path":  "html_ui/InGamePanels/VneGaugePanel/js/MsfsTelemetryDataSource.js",
+                        "size":  2091,
+                        "date":  134343818940000000
+                    },
+                    {
+                        "path":  "html_ui/InGamePanels/VneGaugePanel/js/SpeedPredictor.js",
+                        "size":  1349,
+                        "date":  134342191580000000
+                    },
+                    {
+                        "path":  "InGamePanels/InGamePanel_VneGauge.spb",
+                        "size":  682,
+                        "date":  134343892740000002
+                    }
+                ]
 }
